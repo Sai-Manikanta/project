@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import QuotesSlider from './../components/QuotesSlider'
-import GoogleIcon from './../components/GoogleIcon'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import QuotesSlider from './../components/QuotesSlider';
+import GoogleIcon from './../components/GoogleIcon';
+import girlWrittingBook from './../assets/images/girl-writting-book.avif';
 
 function Signup() {
 
@@ -11,6 +12,8 @@ function Signup() {
         password: ''
     });
 
+    const navigate = useNavigate();
+
     const handleInputChange = e => {
         setSignupData(data => ({
             ...data,
@@ -18,13 +21,13 @@ function Signup() {
         }));
     }
 
+    const { fullName, email, password } = signupData;
+
     const handleSubmit = e => {
         e.preventDefault();
 
-        console.log(signupData);
+        navigate('/login')
     }
-
-    const { fullName, email, password } = signupData;
 
     return (
         <div className="h-screen grid grid-cols-2">
@@ -41,6 +44,7 @@ function Signup() {
                                 value={fullName}
                                 className="w-full bg-gray-100 px-4 py-3 rounded-lg mt-3 text-sm focus:outline-none"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                         <div className="mt-5">
@@ -52,6 +56,7 @@ function Signup() {
                                 value={email}
                                 className="w-full bg-gray-100 px-4 py-3 rounded-lg mt-3 text-sm focus:outline-none"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                         <div className="mt-5">
@@ -63,6 +68,8 @@ function Signup() {
                                 value={password}
                                 className="w-full bg-gray-100 px-4 py-3 rounded-lg mt-3 text-sm focus:outline-none"
                                 onChange={handleInputChange}
+                                minLength="8"
+                                required
                             />
                         </div>
                         <button type="submit" className="w-full bg-teal-700 py-2 rounded-lg text-white mt-12">Create Account</button>
@@ -77,9 +84,10 @@ function Signup() {
                     </form>
                 </div>
             </div>
+            {/* Right Box */}
             <div
                 className="grow hidden md:grid items-end bg-cover bg-center"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517971129774-8a2b38fa128e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1588&q=80')" }}>
+                style={{ backgroundImage: `url(${girlWrittingBook})` }}>
                 <QuotesSlider />
             </div>
         </div>

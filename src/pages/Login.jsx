@@ -1,13 +1,16 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import QuotesSlider from './../components/QuotesSlider'
-import GoogleIcon from './../components/GoogleIcon'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import QuotesSlider from './../components/QuotesSlider';
+import GoogleIcon from './../components/GoogleIcon';
+import OtpVerification from './../components/OtpVerification';
+import girlWithCap from './../assets/images/girl-with-cap.avif';
 
 function Login() {
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     });
+    const [openOtpModal, setOpenOtpModal] = useState(false);
 
     const handleInputChange = e => {
         setLoginData(data => ({
@@ -19,7 +22,10 @@ function Login() {
     const handleSubmit = e => {
         e.preventDefault();
 
+        /// Send date to server
         console.log(loginData);
+        /// if otp successfully send
+        setOpenOtpModal(true);
     }
 
     const { email, password } = loginData;
@@ -39,6 +45,7 @@ function Login() {
                                 value={email}
                                 className="w-full bg-gray-100 px-4 py-3 rounded-lg mt-3 text-sm focus:outline-none"
                                 onChange={handleInputChange}
+                                required
                             />
                         </div>
                         <div className="mt-5">
@@ -50,6 +57,8 @@ function Login() {
                                 value={password}
                                 className="w-full bg-gray-100 px-4 py-3 rounded-lg mt-3 text-sm focus:outline-none"
                                 onChange={handleInputChange}
+                                minLength="8"
+                                required
                             />
                         </div>
                         <p className="mt-4 text-end"><a href="#">Forgot Password?</a></p>
@@ -65,11 +74,13 @@ function Login() {
                     </form>
                 </div>
             </div>
+            {/* Right Box */}
             <div
                 className="grow hidden md:grid items-end bg-cover bg-bottom"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1665153858062-981c42a7df37?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80')" }}>
+                style={{ backgroundImage: `url(${girlWithCap})` }}>
                 <QuotesSlider />
             </div>
+            {openOtpModal && <OtpVerification open={openOtpModal} setOpenpModal={setOpenOtpModal} />}
         </div>
     )
 }
