@@ -40,7 +40,7 @@ function QuotesSlider() {
     };
 
     return (
-        <div className="px-8 py-5 m-10 xl:h-64 flex flex-col rounded-xl text-white" style={{ backgroundColor: 'rgb(0,128,128, 0.3)' }}>
+        <div className="px-8 py-5 m-10 xl:h-64 flex flex-col rounded-xl text-white" style={{ backgroundColor: 'rgb(0,128,128, 0.5)' }}>
             <div className="flex-grow">
                 <p className="lg:text-lg">{quotes[currentQuoteIndex].quote}</p>
                 <p>- {quotes[currentQuoteIndex].author}</p>
